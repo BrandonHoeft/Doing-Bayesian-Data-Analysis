@@ -1,17 +1,24 @@
--   [Exercise 4.1 Concrete example of joint, marginal, conditional
-    probabilities](#exercise-4.1-concrete-example-of-joint-marginal-conditional-probabilities)
--   [Exercise 4.2 Random Number Generation in
-    R](#exercise-4.2-random-number-generation-in-r)
--   [Exercise 4.3 An example of the logic of long-run relative
-    frequency](#exercise-4.3-an-example-of-the-logic-of-long-run-relative-frequency)
--   [Exercise 4.4 Experience with a Probability Density Function in R
-    and in
-    calculus](#exercise-4.4-experience-with-a-probability-density-function-in-r-and-in-calculus)
--   [Exercise 4.5 Using a Gaussian Distribution to describe degree of
-    beliefs](#exercise-4.5-using-a-gaussian-distribution-to-describe-degree-of-beliefs)
--   [Exercise 4.6 Recognize and work with the fact that Equation 4.9 can
-    be solved for the joint probability, crucial for developing Bayes'
-    theorem.](#exercise-4.6-recognize-and-work-with-the-fact-that-equation-4.9-can-be-solved-for-the-joint-probability-crucial-for-developing-bayes-theorem.)
+-   [Ch. 4 Problems: What is this stuff called
+    probability?](#ch.-4-problems-what-is-this-stuff-called-probability)
+    -   [Exercise 4.1 Concrete example of joint, marginal, conditional
+        probabilities](#exercise-4.1-concrete-example-of-joint-marginal-conditional-probabilities)
+    -   [Exercise 4.2 Random Number Generation in
+        R](#exercise-4.2-random-number-generation-in-r)
+    -   [Exercise 4.3 An example of the logic of long-run relative
+        frequency](#exercise-4.3-an-example-of-the-logic-of-long-run-relative-frequency)
+    -   [Exercise 4.4 Experience with a Probability Density Function in
+        R and in
+        calculus](#exercise-4.4-experience-with-a-probability-density-function-in-r-and-in-calculus)
+    -   [Exercise 4.5 Using a Gaussian Distribution to describe degree
+        of
+        beliefs](#exercise-4.5-using-a-gaussian-distribution-to-describe-degree-of-beliefs)
+    -   [Exercise 4.6 Recognize and work with the fact that Equation 4.9
+        can be solved for the joint probability, crucial for developing
+        Bayes'
+        theorem.](#exercise-4.6-recognize-and-work-with-the-fact-that-equation-4.9-can-be-solved-for-the-joint-probability-crucial-for-developing-bayes-theorem.)
+
+Ch. 4 Problems: What is this stuff called probability?
+======================================================
 
 ### Exercise 4.1 Concrete example of joint, marginal, conditional probabilities
 

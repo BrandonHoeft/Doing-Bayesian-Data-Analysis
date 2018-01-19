@@ -13,6 +13,8 @@ output:
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, comment = "")
 ```
 
+# Ch. 4 Problems: What is this stuff called probability?
+
 ### Exercise 4.1 Concrete example of joint, marginal, conditional probabilities
 
 The eye-hair color data from Chapter 4 is a built in array in R, called `HairEyeColor`. The following code explores the joint, marginal, and conditional probabilities of these crosstabs. 
