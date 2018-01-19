@@ -1,2 +1,4 @@
 # Doing-Bayesian-Data-Analysis
-MY R code from the book (2nd Edition) by John K. Kruschke
+Bayesian data analysis has been a keen interest of mine ever since I finished grad school. Most of my statistical education dealt with issues of long-run frequency problems, and therefore probability problems failed to exist whenever I experience a scenario where the sample size is close to 1, a rare event, or hard to repeat. The concept of subjective probability, calibrating our beliefs like a probability distribution, and updating on our prior beliefs with new data, has started to become very appealing to me for practical purposes in decision making. 
+
+The examples contained herein mark some of my beginning learnings in bayesian data analysis based on the end of chapter exercises from the book "Doing Bayesian Data Analysis" (2nd Edition) by John K. Kruschke.
