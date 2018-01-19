@@ -1,7 +1,12 @@
--   [Exercise 2.1 Manipulating
-    Probabilities](#exercise-2.1-manipulating-probabilities)
--   [Exercise 2.2 How data causes probabilities to
-    shift.](#exercise-2.2-how-data-causes-probabilities-to-shift.)
+-   [Ch. 2 Problems: Credibility, Models,
+    Parameters](#ch.-2-problems-credibility-models-parameters)
+    -   [Exercise 2.1 Manipulating
+        Probabilities](#exercise-2.1-manipulating-probabilities)
+    -   [Exercise 2.2 How data causes probabilities to
+        shift.](#exercise-2.2-how-data-causes-probabilities-to-shift.)
+
+Ch. 2 Problems: Credibility, Models, Parameters
+===============================================
 
 ### Exercise 2.1 Manipulating Probabilities
 

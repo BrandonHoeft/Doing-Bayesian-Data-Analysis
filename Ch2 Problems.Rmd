@@ -13,6 +13,8 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# Ch. 2 Problems: Credibility, Models, Parameters
+
 ### Exercise 2.1 Manipulating Probabilities
 
 x represents the value of the bottom face of the die.
