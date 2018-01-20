@@ -249,14 +249,14 @@ rule.
 
 Now we need to apply the power rule.
 
-$$6(\\frac{x^2}{2}+\\frac{-x^3}{3})$$
+$$6( \\frac {x^2}{2} + \\frac {-x^3}{3} )$$
 
 To integrate from 1 to 0, just find the difference between F(1) - F(0).
 F(0) = 0. When we plug in 1 for F(1)
 
-$$ 6(\\frac{1}{2}+\\frac{-1}{3}) $$
+$$6( \\frac {1}{2} + \\frac {-1}{3} )$$
 
-$$6(\\frac{1}{6})=1$$
+$$6( \\frac {1}{6} )=1$$
 
 **C)** Yes, this function satisfies the definition of a probability
 density function because it integrates to 1 over the interval ∈\[0, 1\].

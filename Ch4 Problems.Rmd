@@ -147,7 +147,7 @@ Consider the probability density function $p(x) = 6x(1-x)$
 
 As a reminder, a probability density is the ratio of probability mass to the interval width. The probability density function can be expressed as the intregral of $$\int dx p(x) = 1$$
 
-**A)** Plot this density function and approximate its integral, only considering values of x falling over the interval $x\in[0,1]$
+**A)** Plot this density function and approximate its integral, only considering values of x falling over the interval $x \in [0,1]$
 
 ``` {r}
 pr_density <- function(x) {
@@ -171,22 +171,22 @@ data.frame(x_range, y_density) %>%
 
 **B)** Derive the exact  integral using calculus. 
   
-$$\int_0^1\mathrm{d}x 6x(1-x)$$
+$$\int_0^1 \mathrm{d}x 6x(1-x)$$
 
 Apply the constant multiple rule for antiderivatives, and the power rule.
 
-$$6\int_0^1\mathrm{d}x(x-x^2)$$
+$$6 \int_0^1 \mathrm{d} x(x-x^2)$$
   
 Now we need to apply the power rule.
   
-$$6(\frac{x^2}{2}+\frac{-x^3}{3})$$
+$$6( \frac {x^2}{2} + \frac {-x^3}{3} )$$
   
 
 To integrate from 1 to 0, just find the difference between F(1) - F(0). F(0) = 0. When we plug in 1 for F(1)
   
-$$ 6(\frac{1}{2}+\frac{-1}{3}) $$
+$$6( \frac {1}{2} + \frac {-1}{3} )$$
   
-$$6(\frac{1}{6})=1$$
+$$6( \frac {1}{6} )=1$$
   
 
 **C)** Yes, this function satisfies the definition of a probability density function because it integrates to 1 over the interval $\in[0,1]$.
