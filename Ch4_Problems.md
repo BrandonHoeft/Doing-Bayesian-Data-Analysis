@@ -241,19 +241,24 @@ considering values of x falling over the interval *x* ∈ \[0, 1\]
 **B)** Derive the exact integral using calculus.
 
 ∫<sub>0</sub><sup>1</sup>*d**x*6*x*(1 − *x*)
- Apply the constant multiple rule for antiderivatives, and the power
+
+Apply the constant multiple rule for antiderivatives, and the power
 rule.
 
 6∫<sub>0</sub><sup>1</sup>*d**x*(*x* − *x*<sup>2</sup>)
- Now need to apply the power rule.
 
-$$6(\\frac{x^2}{2} + \\frac{-x^3}{3})$$
- To integrate from 1 to 0, just find the difference between F(1) - F(0).
-F(0) = 0. When we plut in 1 for F(1)
+Now we need to apply the power rule.
 
-$$ 6(\\frac{1}{2} + \\frac{-1}{3}) $$
-$$6(\\frac{1}{6} ) = 1$$
- **C)** Yes, this function satisfies the definition of a probability
+$$6(\\frac{x^2}{2}+\\frac{-x^3}{3})$$
+
+To integrate from 1 to 0, just find the difference between F(1) - F(0).
+F(0) = 0. When we plug in 1 for F(1)
+
+$$ 6(\\frac{1}{2}+\\frac{-1}{3}) $$
+
+$$6(\\frac{1}{6})=1$$
+
+**C)** Yes, this function satisfies the definition of a probability
 density function because it integrates to 1 over the interval ∈\[0, 1\].
 
 **D)** From inspecting the graph, the maximum density is 1.5 density
