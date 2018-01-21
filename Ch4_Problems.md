@@ -3,18 +3,15 @@ Ch4 Problems: What is this stuff called probability?
 Brandon Hoeft
 January 18, 2018
 
--   [Ch. 4 Problems: What is this stuff called probability?](#ch.-4-problems-what-is-this-stuff-called-probability)
-    -   [Exercise 4.1 Concrete example of joint, marginal, conditional probabilities](#exercise-4.1-concrete-example-of-joint-marginal-conditional-probabilities)
-    -   [Exercise 4.2 Random Number Generation in R](#exercise-4.2-random-number-generation-in-r)
-    -   [Exercise 4.3 An example of the logic of long-run relative frequency](#exercise-4.3-an-example-of-the-logic-of-long-run-relative-frequency)
-    -   [Exercise 4.4 Experience with a Probability Density Function in R and in calculus](#exercise-4.4-experience-with-a-probability-density-function-in-r-and-in-calculus)
-    -   [Exercise 4.5 Use a Gaussian Distribution to describe degree of beliefs](#exercise-4.5-use-a-gaussian-distribution-to-describe-degree-of-beliefs)
-    -   [Exercise 4.6 Recognize and work with the fact that Equation 4.9 can be solved for the joint probability, crucial for developing Bayes' theorem.](#exercise-4.6-recognize-and-work-with-the-fact-that-equation-4.9-can-be-solved-for-the-joint-probability-crucial-for-developing-bayes-theorem.)
+-   [Exercise 4.1 Concrete example of joint, marginal, conditional probabilities](#exercise-4.1-concrete-example-of-joint-marginal-conditional-probabilities)
+-   [Exercise 4.2 Random Number Generation in R](#exercise-4.2-random-number-generation-in-r)
+-   [Exercise 4.3 An example of the logic of long-run relative frequency](#exercise-4.3-an-example-of-the-logic-of-long-run-relative-frequency)
+-   [Exercise 4.4 Experience with a Probability Density Function in R and in calculus](#exercise-4.4-experience-with-a-probability-density-function-in-r-and-in-calculus)
+-   [Exercise 4.5 Use a Gaussian Distribution to describe degree of beliefs](#exercise-4.5-use-a-gaussian-distribution-to-describe-degree-of-beliefs)
+-   [Exercise 4.6 Recognize and work with the fact that Equation 4.9 can be solved for the joint probability, crucial for developing Bayes' theorem.](#exercise-4.6-recognize-and-work-with-the-fact-that-equation-4.9-can-be-solved-for-the-joint-probability-crucial-for-developing-bayes-theorem.)
 
-Ch. 4 Problems: What is this stuff called probability?
-======================================================
-
-### Exercise 4.1 Concrete example of joint, marginal, conditional probabilities
+Exercise 4.1 Concrete example of joint, marginal, conditional probabilities
+---------------------------------------------------------------------------
 
 The eye-hair color data from Chapter 4 is a built in array in R, called `HairEyeColor`. The following code explores the joint, marginal, and conditional probabilities of these crosstabs.
 
@@ -93,7 +90,8 @@ round(EyeHairProp['Blue',] / EyeProp['Blue'], 2)
     Black Brown   Red Blond 
      0.08  0.39  0.08  0.44 
 
-### Exercise 4.2 Random Number Generation in R
+Exercise 4.2 Random Number Generation in R
+------------------------------------------
 
 Simulate a biased coin with a p(Heads) = 0.8. I will simulate this using 100,000 flips and plot the cumulative proportion of heads after each flip. This exercise demonstrates, as eluded to by Kruschke that the long-run relative frequency will approach and adequately approximate the underlying true probability (we're assuming p(Heads) = 0.8 is true for this particular coin). This is like the [law of large numbers](https://en.wikipedia.org/wiki/Law_of_large_numbers).
 
@@ -122,7 +120,8 @@ ggplot(long_run_frequency, aes(x = flip_number, y = cumulative_heads / flip_numb
 
 ![](Ch4_Problems_files/figure-markdown_github/unnamed-chunk-6-1.png)
 
-### Exercise 4.3 An example of the logic of long-run relative frequency
+Exercise 4.3 An example of the logic of long-run relative frequency
+-------------------------------------------------------------------
 
 Determine the exact probability of drawing a 10 from a shuffled pinockle deck (a pincokle deck has 48 cards with 6 values: 9, 10, Jack, Queen, King, Ace). There are 2 copies of each value in the standard four suits: hearts, diamonds, clubs, spades.
 
@@ -178,7 +177,8 @@ sum(pinockle_joint_prob[,c("10", "Jack")])
 
     [1] 0.336
 
-### Exercise 4.4 Experience with a Probability Density Function in R and in calculus
+Exercise 4.4 Experience with a Probability Density Function in R and in calculus
+--------------------------------------------------------------------------------
 
 **NOTE: LATEX equations from Mathjax don't render on md\_document for Github**
 
@@ -233,7 +233,8 @@ $$6( \\frac {1}{6} )=1$$
 
 **D)** From inspecting the graph, the maximum density is 1.5 density when x is approximately 0.5. We can see this looks true when calculating 6(0.5)\*(1 − 0.5)=1.5
 
-### Exercise 4.5 Use a Gaussian Distribution to describe degree of beliefs
+Exercise 4.5 Use a Gaussian Distribution to describe degree of beliefs
+----------------------------------------------------------------------
 
 **A)** Describe the area under a normal distribution, with mean mu = 0, and standard deviation sigma = 0.25 by plotting and describing the probability density between -1 and 1 standard deviations around the mean.
 
@@ -258,7 +259,8 @@ ggplot(data.frame(x = c(-1, 1)), aes(x)) +
 
 The mean should be 162. Since the distribution is described as normal, and about 2/3 of all values fall between 147cm and 177cm, we can infer that sigma is 162 - 147 = 15.
 
-### Exercise 4.6 Recognize and work with the fact that Equation 4.9 can be solved for the joint probability, crucial for developing Bayes' theorem.
+Exercise 4.6 Recognize and work with the fact that Equation 4.9 can be solved for the joint probability, crucial for developing Bayes' theorem.
+-----------------------------------------------------------------------------------------------------------------------------------------------
 
 We are provided the marginal distribution of grade level from the survey respondents. This is **p(grade) **.
 
@@ -317,7 +319,7 @@ Therefore under an assumption of independence, substitute **p(favorite\_food)** 
 
 This can be rearranged algebraically as **p(favorite\_food) \* p(grade) = p(favorite\_food, grade)**. If the marginal probability of a particular food preference times the marginal probability of a particular grade level equals the joint probability of that food preference and grade level, then food preferences and grade level can be considered independent events that don't influence each other.
 
-One missing ingredient we didn't calculate yet is the marginal probability of favorite food preferences overall in the sample.
+One missing ingredient we didn't calculate yet is the marginal probability of favorite food preferences overall in the sample. This is from adding the columns in the joint distribution table above.
 
     ice cream     fruit     fries 
          0.36      0.24      0.40 
@@ -326,4 +328,4 @@ Let's test independence by asking if liking fries is independent of grade level.
 
 The probability of being in 1st grade and liking fries is 0.02.
 
-This does not equal the marginal probability of liking fries, 0.4 times the marginal probability of being in 1st grade 0.2, which equals 0.08. We can infer that food preference is dependent upon grade level.
+This does not equal the marginal probability of liking fries, 0.4, times the marginal probability of being in 1st grade, 0.2, which equals 0.08. We can infer that food preference is dependent upon grade level.
