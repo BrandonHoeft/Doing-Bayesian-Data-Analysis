@@ -9,9 +9,8 @@
     -   [Exercise 4.4 Experience with a Probability Density Function in
         R and in
         calculus](#exercise-4.4-experience-with-a-probability-density-function-in-r-and-in-calculus)
-    -   [Exercise 4.5 Using a Gaussian Distribution to describe degree
-        of
-        beliefs](#exercise-4.5-using-a-gaussian-distribution-to-describe-degree-of-beliefs)
+    -   [Exercise 4.5 Use a Gaussian Distribution to describe degree of
+        beliefs](#exercise-4.5-use-a-gaussian-distribution-to-describe-degree-of-beliefs)
     -   [Exercise 4.6 Recognize and work with the fact that Equation 4.9
         can be solved for the joint probability, crucial for developing
         Bayes'
@@ -208,6 +207,9 @@ What is the probability of getting a 10 or jack?
 
 ### Exercise 4.4 Experience with a Probability Density Function in R and in calculus
 
+\*\* NOTE: LATEX equations from Mathjax don't render on md\_document for
+Github \*\*
+
 Consider the probability density function *p*(*x*)=6*x*(1 − *x*)
 
 As a reminder, a probability density is the ratio of probability mass to
@@ -265,6 +267,99 @@ density function because it integrates to 1 over the interval ∈\[0, 1\].
 when x is approximately 0.5. We can see this looks true when calculating
 6(0.5)\*(1 − 0.5)=1.5
 
-### Exercise 4.5 Using a Gaussian Distribution to describe degree of beliefs
+### Exercise 4.5 Use a Gaussian Distribution to describe degree of beliefs
+
+**A)** Describe the area under a normal distribution, with mean mu = 0,
+and standard deviation sigma = 0.25 by plotting and describing the
+probability density between -1 and 1 standard deviations around the
+mean.
+
+    ggplot(data.frame(x = c(-1, 1)), aes(x)) +
+        stat_function(fun = dnorm, args = list(mean = 0, sd = 0.25)) +
+        stat_function(fun = dnorm,
+                      xlim = c(-0.25,0.25),
+                      geom = "area",
+                      args = list(mean = 0, sd = 0.25)) +
+        # get the total probability mass between -1 and + 1 sd.
+        annotate("text", x = 0, y = 0.75, 
+                 label = round(pnorm(0.25, 0, 0.25) - pnorm(-0.25, 0, 0.25), 2),
+                 color = "white") +
+        labs(y = "Probability Density",
+             title = "Find Total Probability Mass within 1 SD of the Mean")
+
+![](Ch4_Problems_files/figure-markdown_strict/unnamed-chunk-11-1.png)
+
+**B)** Now use normal curve to describe the following belief: you think
+women's heights follow a bell-shaped distribution, centered at 162cm
+with 2/3 of all heights falling between 147cm and 177cm. What should mu
+and sigma be?
+
+The mean should be 162. Since the distribution is described as normal,
+and about 2/3 of all values fall between 147cm and 177cm, we can infer
+that sigma is 162 - 147 = 15.
 
 ### Exercise 4.6 Recognize and work with the fact that Equation 4.9 can be solved for the joint probability, crucial for developing Bayes' theorem.
+
+p(favorite\_food | grade) = p(favorite\_food, grade) / p(grade)
+
+We are provided the marginal distribution of grade for the survey
+respondents, p(grade).
+
+    # the provided marginal distribution of grade.
+    grade_propn <- c(grade1 = .2, grade6 = .2, grade11 = .6)
+    grade_propn
+
+     grade1  grade6 grade11 
+        0.2     0.2     0.6 
+
+We're also provided the conditional probability of p(favorite\_food |
+grade).
+
+    # the provided conditional distribution of food preference given grade of respondent
+    food_given_grade_propn <- matrix(c(0.3, 0.6, 0.1,
+                                       0.6, 0.3, 0.1,
+                                       0.3, 0.1, 0.6),
+                                     byrow = TRUE,
+                                     nrow = 3,
+                                     ncol = 3,
+                                     dimnames = list(grade = c("grade1", "grade6", "grade11"),
+                                                     food = c("ice cream", "fruit", "fries")))
+    food_given_grade_propn
+
+             food
+    grade     ice cream fruit fries
+      grade1        0.3   0.6   0.1
+      grade6        0.6   0.3   0.1
+      grade11       0.3   0.1   0.6
+
+Given this we can solve the joint distribution of p(favorite\_food,
+grade) = p(favorite\_food | grade) \* p(grade).
+
+    joint_probability_table <- grade_propn * food_given_grade_propn
+    joint_probability_table
+
+             food
+    grade     ice cream fruit fries
+      grade1       0.06  0.12  0.02
+      grade6       0.12  0.06  0.02
+      grade11      0.18  0.06  0.36
+
+We can tell these are joint probabilities because the values in the
+table sum up to 1.0. Given these joint probabilities, can we say that
+food preference is independent of grade?
+
+If food preference is independent of grade level, or vice versa, we can
+think about this as p(favorite\_food | grade) = p(favorite\_food) if
+grade has no influence.
+
+To test independence, we just need to see if p(favorite\_food, grade)
+for any food and grade value equals the product of the marginal
+probabilities for that food preference and grade level.
+
+    # marginal probability of favorite food.
+    prob_favorite_food <- apply(joint_probability_table, "food", sum)
+    # marginal probability of grade level.
+    prob_grade_level <- apply(joint_probability_table, "grade", sum)
+
+The probability of being in 1st grade and liking fries is 0.02, which
+does not equal the p(fries) multiplied by p(grade1), 0.08.

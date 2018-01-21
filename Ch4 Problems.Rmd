@@ -141,7 +141,9 @@ sum(pinockle_joint_prob[,c("10", "Jack")])
 ```
   
 
-### Exercise 4.4 Experience with a Probability Density Function in R and in calculus
+### Exercise 4.4 Experience with a Probability Density Function in R and in calculus 
+
+** NOTE: LATEX equations from Mathjax don't render on md_document for Github **
 
 Consider the probability density function $p(x) = 6x(1-x)$
 
@@ -193,9 +195,78 @@ $$6( \frac {1}{6} )=1$$
   
 **D)** From inspecting the graph, the maximum density is 1.5 density when x is approximately 0.5. We can see this looks true when calculating $6(0.5) * (1 - 0.5) = 1.5$
 
-### Exercise 4.5 Using a Gaussian Distribution to describe degree of beliefs
+### Exercise 4.5 Use a Gaussian Distribution to describe degree of beliefs
 
+**A)** Describe the area under a normal distribution, with mean mu = 0, and standard deviation sigma = 0.25 by plotting and describing the probability density between -1 and 1 standard deviations around the mean.
+
+``` {r}
+
+
+ggplot(data.frame(x = c(-1, 1)), aes(x)) +
+    stat_function(fun = dnorm, args = list(mean = 0, sd = 0.25)) +
+    stat_function(fun = dnorm,
+                  xlim = c(-0.25,0.25),
+                  geom = "area",
+                  args = list(mean = 0, sd = 0.25)) +
+    # get the total probability mass between -1 and + 1 sd.
+    annotate("text", x = 0, y = 0.75, 
+             label = round(pnorm(0.25, 0, 0.25) - pnorm(-0.25, 0, 0.25), 2),
+             color = "white") +
+    labs(y = "Probability Density",
+         title = "Find Total Probability Mass within 1 SD of the Mean")
+  
+
+```
+
+**B)** Now use normal curve to describe the following belief: you think women's heights follow a bell-shaped distribution, centered at 162cm with 2/3 of all heights falling between 147cm and 177cm. What should mu and sigma be? 
+
+The mean should be 162. Since the distribution is described as normal, and about 2/3 of all values fall between 147cm and 177cm, we can infer that sigma is 162 - 147 = 15.
 
 ### Exercise 4.6 Recognize and work with the fact that Equation 4.9 can be solved for the joint probability, crucial for developing Bayes' theorem.
 
+p(favorite_food | grade) = p(favorite_food, grade) / p(grade)
 
+We are provided the marginal distribution of grade for the survey respondents, p(grade).
+
+``` {r}
+# the provided marginal distribution of grade.
+grade_propn <- c(grade1 = .2, grade6 = .2, grade11 = .6)
+grade_propn
+```
+
+We're also provided the conditional probability of p(favorite_food | grade).
+
+``` {r}
+# the provided conditional distribution of food preference given grade of respondent
+food_given_grade_propn <- matrix(c(0.3, 0.6, 0.1,
+                                   0.6, 0.3, 0.1,
+                                   0.3, 0.1, 0.6),
+                                 byrow = TRUE,
+                                 nrow = 3,
+                                 ncol = 3,
+                                 dimnames = list(grade = c("grade1", "grade6", "grade11"),
+                                                 food = c("ice cream", "fruit", "fries")))
+food_given_grade_propn
+```
+
+Given this we can solve the joint distribution of p(favorite_food, grade) = p(favorite_food | grade) * p(grade).
+
+``` {r}
+joint_probability_table <- grade_propn * food_given_grade_propn
+joint_probability_table
+```
+
+We can tell these are joint probabilities because the values in the table sum up to 1.0. Given these joint probabilities, can we say that food preference is independent of grade? 
+
+If food preference is independent of grade level, or vice versa, we can think about this as p(favorite_food | grade) = p(favorite_food) if grade has no influence. 
+
+To test independence, we just need to see if p(favorite_food, grade) for any food and grade value equals the product of the marginal probabilities for that food preference and grade level.
+
+``` {r}
+# marginal probability of favorite food.
+prob_favorite_food <- apply(joint_probability_table, "food", sum)
+# marginal probability of grade level.
+prob_grade_level <- apply(joint_probability_table, "grade", sum)
+```
+
+The probability of being in 1st grade and liking fries is `r joint_probability_table['grade1', 'fries']`, which does not equal the p(fries) multiplied by p(grade1), `r prob_grade_level[["grade1"]] * prob_favorite_food[["fries"]]`.
