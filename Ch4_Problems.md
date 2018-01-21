@@ -300,10 +300,8 @@ that sigma is 162 - 147 = 15.
 
 ### Exercise 4.6 Recognize and work with the fact that Equation 4.9 can be solved for the joint probability, crucial for developing Bayes' theorem.
 
-p(favorite\_food | grade) = p(favorite\_food, grade) / p(grade)
-
-We are provided the marginal distribution of grade for the survey
-respondents, p(grade).
+We are provided the marginal distribution of grade level from the survey
+respondents. This is p(grade).
 
     # the provided marginal distribution of grade.
     grade_propn <- c(grade1 = .2, grade6 = .2, grade11 = .6)
@@ -332,8 +330,15 @@ grade).
       grade6        0.6   0.3   0.1
       grade11       0.3   0.1   0.6
 
-Given this we can solve the joint distribution of p(favorite\_food,
-grade) = p(favorite\_food | grade) \* p(grade).
+Since we know the equation for a conditional probability of discrete
+events is:
+
+p(favorite\_food | grade) = p(favorite\_food, grade) / p(grade)
+
+We have the two ingredients solve the joint distribution of
+p(favorite\_food, grade) = p(favorite\_food | grade) \* p(grade). Note,
+we just need to multiply both sides of the conditional probability
+equation to now solve for the join probability, p(favorite\_food, grade)
 
     joint_probability_table <- grade_propn * food_given_grade_propn
     joint_probability_table
@@ -344,22 +349,38 @@ grade) = p(favorite\_food | grade) \* p(grade).
       grade6       0.12  0.06  0.02
       grade11      0.18  0.06  0.36
 
-We can tell these are joint probabilities because the values in the
-table sum up to 1.0. Given these joint probabilities, can we say that
-food preference is independent of grade?
+We confirm these are joint probabilities because the values in the above
+table sum up to 1.0. Given the joint probabilities, can we say that food
+preference is independent of grade?
 
 If food preference is independent of grade level, or vice versa, we can
-think about this as p(favorite\_food | grade) = p(favorite\_food) if
-grade has no influence.
+think about the conditional probability, p(favorite\_food | grade),
+would be the same as p(favorite\_food) if grade has no influence.
 
-To test independence, we just need to see if p(favorite\_food, grade)
-for any food and grade value equals the product of the marginal
-probabilities for that food preference and grade level.
+Therefore under an assumption of independence, substitute
+p(favorite\_food) for p(favorite\_food | grade) in the contitional
+probability equation: p(favorite\_food) = p(favorite\_food, grade) /
+p(grade).
 
-    # marginal probability of favorite food.
-    prob_favorite_food <- apply(joint_probability_table, "food", sum)
-    # marginal probability of grade level.
-    prob_grade_level <- apply(joint_probability_table, "grade", sum)
+This can be rearranged algebraically as p(favorite\_food) \* p(grade) =
+p(favorite\_food, grade). If the marginal probability of a particular
+food preference times the marginal probability of a particular grade
+level equals the joint probability of that food preference and grade
+level, then food preferences and grade level can be considered
+independent events that don't influence each other.
 
-The probability of being in 1st grade and liking fries is 0.02, which
-does not equal the p(fries) multiplied by p(grade1), 0.08.
+One missing ingredient we didn't calculate yet is the marginal
+probability of favorite food preferences overall in the sample.
+
+    ice cream     fruit     fries 
+         0.36      0.24      0.40 
+
+Let's test independence by asking if liking fries is independent of
+grade level. If it is, the joint probability of 1st graders liking
+fries, for example, should be the same as p(fries) \* p(first grade).
+
+The probability of being in 1st grade and liking fries is 0.02.
+
+This does not equal the marginal probability of liking fries, 0.4 times
+the marginal probability of being in 1st grade 0.2, which equals 0.08.
+We can infer that food preference is dependent upon grade level.
