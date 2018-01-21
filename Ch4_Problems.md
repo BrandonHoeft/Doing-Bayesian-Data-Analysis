@@ -1,8 +1,3 @@
-Ch4 Problems: What is this stuff called probability?
-================
-Brandon Hoeft
-January 18, 2018
-
 -   [Exercise 4.1 Concrete example of joint, marginal, conditional probabilities](#exercise-4.1-concrete-example-of-joint-marginal-conditional-probabilities)
 -   [Exercise 4.2 Random Number Generation in R](#exercise-4.2-random-number-generation-in-r)
 -   [Exercise 4.3 An example of the logic of long-run relative frequency](#exercise-4.3-an-example-of-the-logic-of-long-run-relative-frequency)

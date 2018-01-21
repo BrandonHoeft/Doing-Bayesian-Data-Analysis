@@ -3,7 +3,8 @@ title: "Ch4 Problems: What is this stuff called probability?"
 author: "Brandon Hoeft"
 date: "January 18, 2018"
 output:
-  github_document:
+  md_document:
+    variant: markdown_github
     toc: TRUE
     toc_depth: 2
 ---
