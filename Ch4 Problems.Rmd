@@ -139,7 +139,7 @@ sum(pinockle_joint_prob[,c("10", "Jack")])
 ```
   
 
-## Exercise 4.4 Experience with a Probability Density Function in R and in calculus 
+## Exercise 4.4 Probability Density Function in R and in calculus 
 
 **NOTE: LATEX equations from Mathjax don't render on md_document for Github**
 
