@@ -3,9 +3,9 @@ title: "Ch. 2 Problems: Credibility, Models, Parameters"
 author: "Brandon Hoeft"
 date: "January 9, 2018"
 output:
-  md_document:
+  github_document:
     toc: TRUE
-    toc_depth: 3
+    toc_depth: 2
 ---
 
 
@@ -13,9 +13,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Ch. 2 Problems: Credibility, Models, Parameters
-
-### Exercise 2.1 Manipulating Probabilities
+## Exercise 2.1 Manipulating Probabilities
 
 x represents the value of the bottom face of the die.
 
@@ -50,7 +48,7 @@ round(prop.table(table(tosses)), 2)
 ```
 
 
-### Exercise 2.2 How data causes probabilities to shift.
+## Exercise 2.2 How data causes probabilities to shift.
 
 Keeping with the same models from before with the tetrahedral die, and presume we start out thinking that each model is equally credible. p(A) = p(B) = p(C) = 1/3.
 
