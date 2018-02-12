@@ -119,9 +119,45 @@ BernBeta(priorBetaAB = updated_prior_beliefs,
          showCentTend = "Mode")
 ```
 
-We see that with more data observed, the posterior 95% HDI starts to get more concentrated around a central theta that starts to look more like the data than the prior. Our posterior belief about population preference for candidate A over B is getting stronger upon multiple pieces of increasing data under consideration. 
+Given more data that resembles our updated previous beliefs, the posterior 95% HDI starts to get more concentrated or centered around $\theta$ = 0.58. 
 
-## Exercise 6.3 
+## Exercise 6.3 Learning Experiment Biases
+
+People have been thoroughly trained in a simple learning experiment:
+
+* when they see two words, "radio" and "ocean", press F on keyboard
+* when they see the two words, "radio" and "mountain", press J on the keyboard
+
+New experiment with 50 people:
+
+* when they see word "radio", instruct them to press F or J. 40 chose F, 10 chose J.
+* when they see the words "ocean" and "mountain", press F or J. 15 chose F, 35 chose J.
+
+Assuming a **uniform prior** belief, are people biased toward F or J for either of these test types? Use a 95% HDI to determine which biases can be claimed credible. 
+
+``` {r}
+prior_beliefs <- c(1, 1) # beta distribution shape a and b parameters
+radio_experiment <- c(rep(1, 40), rep(0, 10)) # Response F is 1, response J is 0.
+BernBeta(priorBetaAB = prior_beliefs,
+         Data = radio_experiment,
+         showHDI = TRUE,
+         showCentTend = "Mode")
+
+```
+
+When we assess the computer keys pressed after hearing the word "radio", the 95% HDI of the posterior distribution starts goes from 0.68 to 0.89, way beyond $\theta$ = 0.5, which is the **region of practical equivalence (ROPE)** where we'd expect the bias towards F or J to be covered if people were truly not biased towards pressing either F or J key. We conclude that people have a bias towards F when they hear the word "radio" in this experiment.
+
+``` {r}
+prior_beliefs <- c(1, 1) # beta distribution shape a and b parameters
+radio_experiment <- c(rep(1, 15), rep(0, 35)) # Response F is 1, response J is 0.
+BernBeta(priorBetaAB = prior_beliefs,
+         Data = radio_experiment,
+         showHDI = TRUE,
+         showCentTend = "Mode")
+
+```
+
+When we assess the computer keys pressed after hearing the word "ocean" and "mountain", the 95% HDI of the posterior distribution does not cover $\theta$ = 0.5. We can conclude that the participants have a bias against choosing F when hearing these two words together.
 
 ## Exercise 6.4
 

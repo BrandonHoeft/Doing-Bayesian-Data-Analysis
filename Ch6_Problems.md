@@ -10,9 +10,9 @@ February 11, 2018
     -   [6.1C Observe a tails on the 3rd flip.](#c-observe-a-tails-on-the-3rd-flip.)
     -   [6.1D Change the order of the observed data](#d-change-the-order-of-the-observed-data)
 -   [Exercise 6.2 Election Polling](#exercise-6.2-election-polling)
-    -   [6.2A](#a)
-    -   [6.2B](#b)
--   [Exercise 6.3](#exercise-6.3)
+    -   [6.2A Read about some polling data](#a-read-about-some-polling-data)
+    -   [6.2B Incorporate your own personal polling data](#b-incorporate-your-own-personal-polling-data)
+-   [Exercise 6.3 Learning Experiment Biases](#exercise-6.3-learning-experiment-biases)
 -   [Exercise 6.4](#exercise-6.4)
 -   [Exercise 6.5](#exercise-6.5)
 
@@ -120,7 +120,7 @@ Exercise 6.2 Election Polling
 
 To connect high-density intervals to the real world. Suppose an election is coming up for Candidate A vs. B. *A recently published newspaper poll says that of 100 randomly sampled people, 58 preferred candidate A*.
 
-### 6.2A
+### 6.2A Read about some polling data
 
 Suppose prior to reading the poll, your belief about who would win was **uniform**. What's your 95% HDI of your beliefs now having read the poll? A uniform beta distribution is of the form **B(*θ* | 1, 1)**
 
@@ -137,7 +137,7 @@ BernBeta(priorBetaAB = prior_beliefs,
 
     [1] 59 43
 
-### 6.2B
+### 6.2B Incorporate your own personal polling data
 
 Say you conduct a follow up poll from the one you read about, and 57 of 100 people randomly sampled prefer candidate A. Now, what is the 95% highest density interval of your posterior beliefs that the general population prefers candidate A to B?
 
@@ -155,8 +155,52 @@ BernBeta(priorBetaAB = updated_prior_beliefs,
 
     [1] 116  86
 
-Exercise 6.3
-------------
+Given more data that resembles our updated previous beliefs, the posterior 95% HDI starts to get more concentrated or centered around *θ* = 0.58.
+
+Exercise 6.3 Learning Experiment Biases
+---------------------------------------
+
+People have been thoroughly trained in a simple learning experiment:
+
+-   when they see two words, "radio" and "ocean", press F on keyboard
+-   when they see the two words, "radio" and "mountain", press J on the keyboard
+
+New experiment with 50 people:
+
+-   when they see word "radio", instruct them to press F or J. 40 chose F, 10 chose J.
+-   when they see the words "ocean" and "mountain", press F or J. 15 chose F, 35 chose J.
+
+Assuming a **uniform prior** belief, are people biased toward F or J for either of these test types? Use a 95% HDI to determine which biases can be claimed credible.
+
+``` r
+prior_beliefs <- c(1, 1) # beta distribution shape a and b parameters
+radio_experiment <- c(rep(1, 40), rep(0, 10)) # Response F is 1, response J is 0.
+BernBeta(priorBetaAB = prior_beliefs,
+         Data = radio_experiment,
+         showHDI = TRUE,
+         showCentTend = "Mode")
+```
+
+![](Ch6_Problems_files/figure-markdown_github/unnamed-chunk-8-1.png)
+
+    [1] 41 11
+
+When we assess the computer keys pressed after hearing the word "radio", the 95% HDI of the posterior distribution starts goes from 0.68 to 0.89, way beyond *θ* = 0.5, which is the **region of practical equivalence (ROPE)** where we'd expect the bias towards F or J to be covered if people were truly not biased towards pressing either F or J key. We conclude that people have a bias towards F when they hear the word "radio" in this experiment.
+
+``` r
+prior_beliefs <- c(1, 1) # beta distribution shape a and b parameters
+radio_experiment <- c(rep(1, 15), rep(0, 35)) # Response F is 1, response J is 0.
+BernBeta(priorBetaAB = prior_beliefs,
+         Data = radio_experiment,
+         showHDI = TRUE,
+         showCentTend = "Mode")
+```
+
+![](Ch6_Problems_files/figure-markdown_github/unnamed-chunk-9-1.png)
+
+    [1] 16 36
+
+When we assess the computer keys pressed after hearing the word "ocean" and "mountain", the 95% HDI of the posterior distribution does not cover *θ* = 0.5. We can conclude that the participants have a bias against choosing F when hearing these two words together.
 
 Exercise 6.4
 ------------
