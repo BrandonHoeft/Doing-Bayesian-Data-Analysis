@@ -9,7 +9,9 @@ February 11, 2018
     -   [6.1B Use posterior from the last flip as the new prior](#b-use-posterior-from-the-last-flip-as-the-new-prior)
     -   [6.1C Observe a tails on the 3rd flip.](#c-observe-a-tails-on-the-3rd-flip.)
     -   [6.1D Change the order of the observed data](#d-change-the-order-of-the-observed-data)
--   [Exercise 6.2](#exercise-6.2)
+-   [Exercise 6.2 Election Polling](#exercise-6.2-election-polling)
+    -   [6.2A](#a)
+    -   [6.2B](#b)
 -   [Exercise 6.3](#exercise-6.3)
 -   [Exercise 6.4](#exercise-6.4)
 -   [Exercise 6.5](#exercise-6.5)
@@ -33,9 +35,19 @@ A beta posterior distribution is of the form **B(*θ* | z + a, N - z + b)** wher
 Using the `BernBeta` function associated with programs from the book, we get:
 
 ``` r
+source("/Users/bhoeft/Desktop/temp/DBDA Programs/DBDA2E-utilities.R")
+```
+
+
+    *********************************************************************
+    Kruschke, J. K. (2015). Doing Bayesian Data Analysis, Second Edition:
+    A Tutorial with R, JAGS, and Stan. Academic Press / Elsevier.
+    *********************************************************************
+
+``` r
 source("/Users/bhoeft/Desktop/temp/DBDA Programs/BernBeta.R")
 # a = 4, b = 4 for beta prior; observe 1 head from 1 flip. 
-BernBeta(priorBetaAB = c(4, 4), Data = c(1))
+BernBeta(priorBetaAB = c(4, 4), Data = c(1), showCentTend="Mode")
 ```
 
 ![](Ch6_Problems_files/figure-markdown_github/unnamed-chunk-1-1.png)
@@ -63,7 +75,7 @@ Here a = 5, and b = 4 as our beta distribution shape parameters. They account fo
 
 ``` r
 # a = 5, b = 4 for beta prior; 1 for observing 1 heads
-BernBeta(priorBetaAB = c(5, 4), Data = c(1))
+BernBeta(priorBetaAB = c(5, 4), Data = c(1), showCentTend="Mode")
 ```
 
 ![](Ch6_Problems_files/figure-markdown_github/unnamed-chunk-3-1.png)
@@ -78,7 +90,7 @@ Using the posterior from the last flip (accounts for 2 heads in 2 flips per the 
 
 ``` r
 # a = 6, b = 4 for beta prior; 1 for observing 1 heads
-BernBeta(priorBetaAB = c(6, 4), Data = c(0))
+BernBeta(priorBetaAB = c(6, 4), Data = c(0), showCentTend="Mode")
 ```
 
 ![](Ch6_Problems_files/figure-markdown_github/unnamed-chunk-4-1.png)
@@ -94,7 +106,7 @@ If you changed the order of the observed flips from **Head**, **Head**, **Tail**
 ``` r
 # Data observed previously is T, H. So B(theta | 1 + 4, 2 - 1 + 4) -> B(theta | 5, 5) is new prior
 # toss a Head on final toss
-BernBeta(priorBetaAB = c(5, 5), Data = c(1))
+BernBeta(priorBetaAB = c(5, 5), Data = c(1), showCentTend="Mode")
 ```
 
 ![](Ch6_Problems_files/figure-markdown_github/unnamed-chunk-5-1.png)
@@ -103,8 +115,45 @@ BernBeta(priorBetaAB = c(5, 5), Data = c(1))
 
 We get the same final posterior form as before regardless of ordering of the 3 coin tosses. The posterior distribution is of the identical form **B(*θ* | 6, 5)** from **6.1C**.
 
-Exercise 6.2
-------------
+Exercise 6.2 Election Polling
+-----------------------------
+
+To connect high-density intervals to the real world. Suppose an election is coming up for Candidate A vs. B. *A recently published newspaper poll says that of 100 randomly sampled people, 58 preferred candidate A*.
+
+### 6.2A
+
+Suppose prior to reading the poll, your belief about who would win was **uniform**. What's your 95% HDI of your beliefs now having read the poll? A uniform beta distribution is of the form **B(*θ* | 1, 1)**
+
+``` r
+prior_beliefs <- c(1, 1) # shape a and b parameters.
+polling_observations <- c(rep(1, 58), rep(0, 100-58))
+BernBeta(priorBetaAB = prior_beliefs,
+         Data = polling_observations,
+         showHDI = TRUE,
+         showCentTend = "Mode")
+```
+
+![](Ch6_Problems_files/figure-markdown_github/unnamed-chunk-6-1.png)
+
+    [1] 59 43
+
+### 6.2B
+
+Say you conduct a follow up poll from the one you read about, and 57 of 100 people randomly sampled prefer candidate A. Now, what is the 95% highest density interval of your posterior beliefs that the general population prefers candidate A to B?
+
+``` r
+updated_prior_beliefs <- prior_beliefs + c(58, 100-58) # updated prior shape a and b parameters.
+polling_observations2 <- c(rep(1, 57), rep(0, 100-57)) # my personal poll
+
+BernBeta(priorBetaAB = updated_prior_beliefs,
+         Data = polling_observations2,
+         showHDI = TRUE,
+         showCentTend = "Mode")
+```
+
+![](Ch6_Problems_files/figure-markdown_github/unnamed-chunk-7-1.png)
+
+    [1] 116  86
 
 Exercise 6.3
 ------------
