@@ -145,7 +145,7 @@ BernBeta(priorBetaAB = prior_beliefs,
 
 ```
 
-When we assess the computer keys pressed after hearing the word "radio", the 95% HDI of the posterior distribution starts goes from 0.68 to 0.89, way beyond $\theta$ = 0.5, which is the **region of practical equivalence (ROPE)** where we'd expect the bias towards F or J to be covered if people were truly not biased towards pressing either F or J key. We conclude that people have a bias towards F when they hear the word "radio" in this experiment.
+When we assess the computer keys pressed after hearing the word "radio", the 95% HDI of the posterior distribution goes from 0.68 to 0.89, way beyond $\theta$ = 0.5, which is the **region of practical equivalence (ROPE)** where we'd expect the bias towards F or J to be covered if people were truly not biased towards pressing either F or J key. We conclude that people have a bias towards F when they hear the word "radio" in this experiment.
 
 ``` {r}
 prior_beliefs <- c(1, 1) # beta distribution shape a and b parameters
@@ -159,6 +159,60 @@ BernBeta(priorBetaAB = prior_beliefs,
 
 When we assess the computer keys pressed after hearing the word "ocean" and "mountain", the 95% HDI of the posterior distribution does not cover $\theta$ = 0.5. We can conclude that the participants have a bias against choosing F when hearing these two words together.
 
-## Exercise 6.4
+## Exercise 6.4 Coin from a Magic Trick Store
 
-## Exercise 6.5
+Suppose we have a coin from a magic trick store, and we believe this coin to be biased to usually come up heads or usually to come up tails, but we're unsure which. Express this uncertainty as a beta prior (either highly likely heads or tails). 
+
+We flip the coin and oberve 4 heads in 5 flips. What is the posterior distribution that the coin is biased heads?
+
+``` {r}
+prior_beliefs <- c(0.1, 0.1) # shape a and b parameters
+coin_flips <- c(1, 1, 1, 1, 0) # Heads is 1, tails is 0.
+BernBeta(priorBetaAB = prior_beliefs,
+         Data = coin_flips,
+         showHDI = TRUE,
+         showCentTend = "Mode")
+
+
+```
+
+
+## Exercise 6.5 Predicting the next observation
+
+To get hands on experience with predicting the next dataum, and see how the prior influences that prediction.
+
+### 6.5A Fair Coin
+
+Suppose you know you have an untampered with, presumably fair coin, minted by the US Government. You have a strong prior belief the coin is fair. But upon flipping the coin 10 times, and observing 9 heads, you are not so sure. 
+
+What's your predicted probability for the 11th flip, heads or tails? Justify the choice of a prior.
+
+``` {r}
+prior_beliefs <- c(250, 250)
+coin_flips <- c(heads = rep(1, 9), tails = 0)
+BernBeta(priorBetaAB = prior_beliefs,
+         Data = coin_flips,
+         showHDI = TRUE,
+         showCentTend = "Mean")
+
+```
+
+My posterior belief that the coin is heads on the 11th flip is 0.51, the posterior mean (a weighted average of the prior mean and the data proportion). This is slightly higher than a fair coin. For calibrating my prior beliefs, I chose **B($\theta$ | 250, 250)**, which is a strong prior belief that the coin is fair. **The choice of a prior sample size of 500 coin flips reflects the sample size of new data that be able would to sway me from my prior beliefs, to equal weight between my priors and the data ** I would need to see at least 500 total flips, exhibiting 90% heads to really consider it an unbiased coin, given that I know it's an untampered with coin minted by the US Government. 
+
+### 6.5B Magic Coin
+
+Same setup as in 6.5A, except the coin I have is made of strange material and marked in fine print saying *Patent Pending, International Magic Inc.*. I observe 9 heads from 10 flips of this coin. 
+
+What's the predicted probability for the 11th flip, heads or tails? Justify the choice of a prior.
+
+``` {r}
+prior_beliefs <- c(.05, .05)
+coin_flips <- c(heads = rep(1, 9), tails = 0)
+BernBeta(priorBetaAB = prior_beliefs,
+         Data = coin_flips,
+         showHDI = TRUE,
+         showCentTend = "Mean")
+
+```
+
+I would initially start by thinking the coin is likely biased, but I'm unsure which way, biased heads or tails. I'll use a **B($\theta$ | .05, .05)** to express strong prior the coin is either very heads or very tails biased. My predicted probability for the 11th flip is .896 that the coin turns up heads. This probability reflects the posterior mean (a weighted average of the prior mean and the data proportion).
