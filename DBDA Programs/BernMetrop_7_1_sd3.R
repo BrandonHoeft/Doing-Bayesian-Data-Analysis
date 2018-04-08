@@ -1,4 +1,4 @@
-graphics.off()
+# graphics.off()
 rm(list=ls(all=TRUE))
 fileNameRoot="BernMetrop" # for output filenames
 # source("DBDA2E-utilities.R")

@@ -22,9 +22,7 @@ Here we'll explore the impact of 3 different values of proposal distribution SD 
 First is using a proposal distribution SD of 0.02. We see the histogram of the posterior distribution followed by plots of the beginning and ending of the MCMC sampling chain.
 
 ``` r
-#source("/Users/bhoeft/Desktop/temp/DBDA Programs/DBDA2E-utilities.R"). 
-# commented out line 4, 57. Change seed in line 55 to 123. comment out line 89 for openGraph
-# so can generate the graph output in this RMarkdown script. 
+# added line 5 in script below. commented out line 1, 4, 57. comment out line 89 for openGraph so can generate the graph output in this RMarkdown script. Change seed in line 55 to 123. 
 source("/Users/bhoeft/Desktop/temp/DBDA Programs/BernMetrop_7_1_sd1.R")
 ```
 
@@ -34,11 +32,12 @@ source("/Users/bhoeft/Desktop/temp/DBDA Programs/BernMetrop_7_1_sd1.R")
     A Tutorial with R, JAGS, and Stan. Academic Press / Elsevier.
     *********************************************************************
 
+![](Ch7_Problems_files/figure-markdown_github/unnamed-chunk-1-1.png)
+
 ### Metropolis Algorithm (MCMC) with Proposal SD of 0.2
 
 ``` r
-# commented out line 4, 57. Change seed in line 55 to 123. comment out line 89 for openGraph
-# so can generate the graph output in this RMarkdown script. 
+# added line 5 in script below. commented out line 1, 4, 57. comment out line 89 for openGraph so can generate the graph output in this RMarkdown script. Change seed in line 55 to 123. 
 source("/Users/bhoeft/Desktop/temp/DBDA Programs/BernMetrop_7_1_sd2.R")
 ```
 
@@ -48,11 +47,12 @@ source("/Users/bhoeft/Desktop/temp/DBDA Programs/BernMetrop_7_1_sd2.R")
     A Tutorial with R, JAGS, and Stan. Academic Press / Elsevier.
     *********************************************************************
 
+![](Ch7_Problems_files/figure-markdown_github/unnamed-chunk-2-1.png)
+
 ### Metropolis Algorithm (MCMC) with Proposal SD of 2.0
 
 ``` r
-# commented out line 4, 57. Change seed in line 55 to 123. comment out line 89 for openGraph
-# so can generate the graph output in this RMarkdown script. 
+# added line 5 in script below. commented out line 1, 4, 57. comment out line 89 for openGraph so can generate the graph output in this RMarkdown script. Change seed in line 55 to 123. 
 source("/Users/bhoeft/Desktop/temp/DBDA Programs/BernMetrop_7_1_sd3.R")
 ```
 
@@ -61,3 +61,5 @@ source("/Users/bhoeft/Desktop/temp/DBDA Programs/BernMetrop_7_1_sd3.R")
     Kruschke, J. K. (2015). Doing Bayesian Data Analysis, Second Edition:
     A Tutorial with R, JAGS, and Stan. Academic Press / Elsevier.
     *********************************************************************
+
+![](Ch7_Problems_files/figure-markdown_github/unnamed-chunk-3-1.png)
