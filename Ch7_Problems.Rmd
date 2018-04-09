@@ -115,7 +115,20 @@ The scatterplot has a dense line resembling a diagonal when SD = 2.0 (see direct
 
 We'll use a multimodal prior with the Metropolis algorithm and obser how chains can transition across modes or get stuck within them. This is a good example of using MCMC to apply Bayesian inference to unusual prior beliefs. 
 
+### 7.3A
 
+Consider a prior distribution on coin bias that puts most credibility at 0.0, 0.5, and 1.0. We will formulate this as 
 
+P($\theta$) = ($\cos$($4$$\pi$$\theta$) + 1)$^2$ / 1.5
 
+### 7.3B
 
+Plot this prior distribution.
+
+```{r}
+# possible values of the parameter
+theta <- seq(0, 1, length = 501)
+plot(theta, (cos(4 * pi * theta) + 1)**2 / 1.5, type = "l", main = "Tri-Modal Prior PDF of Coin Bias")
+```
+
+### 7.3C

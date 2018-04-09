@@ -12,6 +12,9 @@ April 8, 2018
     -   [7.2B: Show the autocorrelation plots from the same prior simulations](#b-show-the-autocorrelation-plots-from-the-same-prior-simulations)
     -   [7.2C: Why is the scatterplot a dense diagonal when SD = 2.0?](#c-why-is-the-scatterplot-a-dense-diagonal-when-sd-2.0)
 -   [Exercise 7.3: Using a Multimodal Prior with Metropolis Algorithm MCMC](#exercise-7.3-using-a-multimodal-prior-with-metropolis-algorithm-mcmc)
+    -   [7.3A](#a)
+    -   [7.3B](#b)
+    -   [7.3C](#c)
 
 Exercise 7.1 Experiment with Metropolis Algorithm
 -------------------------------------------------
@@ -159,3 +162,23 @@ Exercise 7.3: Using a Multimodal Prior with Metropolis Algorithm MCMC
 ---------------------------------------------------------------------
 
 We'll use a multimodal prior with the Metropolis algorithm and obser how chains can transition across modes or get stuck within them. This is a good example of using MCMC to apply Bayesian inference to unusual prior beliefs.
+
+### 7.3A
+
+Consider a prior distribution on coin bias that puts most credibility at 0.0, 0.5, and 1.0. We will formulate this as
+
+P(*θ*) = (cos(4*π**θ*) + 1)**<sup>2</sup> / 1.5
+
+### 7.3B
+
+Plot this prior distribution.
+
+``` r
+# possible values of the parameter
+theta <- seq(0, 1, length = 501)
+plot(theta, (cos(4 * pi * theta) + 1)**2 / 1.5, type = "l", main = "Tri-Modal Prior PDF of Coin Bias")
+```
+
+![](Ch7_Problems_files/figure-markdown_github/unnamed-chunk-8-1.png)
+
+### 7.3C
