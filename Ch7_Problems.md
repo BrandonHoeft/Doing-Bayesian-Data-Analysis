@@ -14,7 +14,8 @@ April 8, 2018
 -   [Exercise 7.3: Using a Multimodal Prior with Metropolis Algorithm MCMC](#exercise-7.3-using-a-multimodal-prior-with-metropolis-algorithm-mcmc)
     -   [7.3A](#a)
     -   [7.3B](#b)
-    -   [7.3C](#c)
+    -   [7.3C Metropolis Algorithm samples of a Multimodal Prior](#c-metropolis-algorithm-samples-of-a-multimodal-prior)
+    -   [7.3D Metropolis Algorithm from posterior distribution with Multimodal Prior](#d-metropolis-algorithm-from-posterior-distribution-with-multimodal-prior)
 
 Exercise 7.1 Experiment with Metropolis Algorithm
 -------------------------------------------------
@@ -181,4 +182,41 @@ plot(theta, (cos(4 * pi * theta) + 1)**2 / 1.5, type = "l", main = "Tri-Modal Pr
 
 ![](Ch7_Problems_files/figure-markdown_github/unnamed-chunk-8-1.png)
 
-### 7.3C
+### 7.3C Metropolis Algorithm samples of a Multimodal Prior
+
+Inside the script `BernMetrop.R` find the function definition that specifies the prior distribution. Inside that function definition, comment out the line that assigns a beta density to pTheta, and instead put in a trimodal prior like this:
+
+``` r
+#pTheta = dbeta(theta, 1, 1)
+pTheta <- ((cos(4 * pi * theta) + 1)**2 / 1.5)
+```
+
+Also, feed an empty vector for the data, so the Metropolis Algorithm just exploreshe prior distribution. The histogram of the trajectory of the prior as simulated below looks very to the density plot created in section 7.3B mathematically (ignore the 95% HDI, which assumes a unimodal distribution). What we can conclude from this is that the Metropolis Algorithm is capable of sampling representatively from multimodal distributions.
+
+``` r
+source("/Users/bhoeft/Desktop/temp/DBDA Programs/BernMetrop_7_3C.R")
+```
+
+
+    *********************************************************************
+    Kruschke, J. K. (2015). Doing Bayesian Data Analysis, Second Edition:
+    A Tutorial with R, JAGS, and Stan. Academic Press / Elsevier.
+    *********************************************************************
+
+![](Ch7_Problems_files/figure-markdown_github/unnamed-chunk-10-1.png)
+
+### 7.3D Metropolis Algorithm from posterior distribution with Multimodal Prior
+
+Repeat 7.3C but with observed data under consideration (2 heads and 1 tails observed). Having observed 3 observations of coin flips with expected value of 2/3, the simulated draws from the posterior distribution do appear to make sense as its a compromise between the data and a prior belief of a trimodal distribution. The prior peak near 0 is relatively unlikely given the data and the likelihood function observed, p(D | *θ*).
+
+``` r
+source("/Users/bhoeft/Desktop/temp/DBDA Programs/BernMetrop_7_3D.R")
+```
+
+
+    *********************************************************************
+    Kruschke, J. K. (2015). Doing Bayesian Data Analysis, Second Edition:
+    A Tutorial with R, JAGS, and Stan. Academic Press / Elsevier.
+    *********************************************************************
+
+![](Ch7_Problems_files/figure-markdown_github/unnamed-chunk-11-1.png)

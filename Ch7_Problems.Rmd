@@ -131,4 +131,28 @@ theta <- seq(0, 1, length = 501)
 plot(theta, (cos(4 * pi * theta) + 1)**2 / 1.5, type = "l", main = "Tri-Modal Prior PDF of Coin Bias")
 ```
 
-### 7.3C
+### 7.3C Metropolis Algorithm samples of a Multimodal Prior 
+
+Inside the script `BernMetrop.R` find the function definition that specifies the prior distribution. Inside that function definition, comment out the line that assigns a beta density to pTheta, and instead put in a trimodal prior like this:
+
+```{r eval = FALSE, include = TRUE}
+#pTheta = dbeta(theta, 1, 1)
+pTheta <- ((cos(4 * pi * theta) + 1)**2 / 1.5)
+```
+
+Also, feed an empty vector for the data, so the Metropolis Algorithm just exploreshe prior distribution. The histogram of the trajectory of the prior as simulated below looks very to the density plot created in section 7.3B mathematically (ignore the 95% HDI, which assumes a unimodal distribution). What we can conclude from this is that the Metropolis Algorithm is capable of sampling representatively from multimodal distributions.
+
+``` {r}
+source("/Users/bhoeft/Desktop/temp/DBDA Programs/BernMetrop_7_3C.R")
+```
+
+### 7.3D Metropolis Algorithm from posterior distribution with Multimodal Prior
+
+Repeat 7.3C but with observed data under consideration (2 heads and 1 tails observed). Having observed 3 observations of coin flips with expected value of 2/3, the simulated draws from the posterior distribution do appear to make sense as its a compromise between the data and a prior belief of a trimodal distribution. The prior peak near 0 is relatively unlikely given the data and the likelihood function observed, p(D | $\theta$).
+
+``` {r}
+source("/Users/bhoeft/Desktop/temp/DBDA Programs/BernMetrop_7_3D.R")
+```
+
+
+
