@@ -15,7 +15,9 @@ April 8, 2018
     -   [7.3A](#a)
     -   [7.3B](#b)
     -   [7.3C Metropolis Algorithm samples of a Multimodal Prior](#c-metropolis-algorithm-samples-of-a-multimodal-prior)
-    -   [7.3D Metropolis Algorithm from posterior distribution with Multimodal Prior](#d-metropolis-algorithm-from-posterior-distribution-with-multimodal-prior)
+    -   [7.3D Metropolis Algorithm from posterior distribution with Multimodal Prior Pt.1](#d-metropolis-algorithm-from-posterior-distribution-with-multimodal-prior-pt.1)
+    -   [7.3E Metropolis Algorithm from posterior distribution with Multimodal Prior Pt. 2](#e-metropolis-algorithm-from-posterior-distribution-with-multimodal-prior-pt.-2)
+    -   [7.3F Metropolis Algorithm from posterior distribution with Multimodal Prior Pt. 3](#f-metropolis-algorithm-from-posterior-distribution-with-multimodal-prior-pt.-3)
 
 Exercise 7.1 Experiment with Metropolis Algorithm
 -------------------------------------------------
@@ -191,7 +193,7 @@ Inside the script `BernMetrop.R` find the function definition that specifies the
 pTheta <- ((cos(4 * pi * theta) + 1)**2 / 1.5)
 ```
 
-Also, feed an empty vector for the data, so the Metropolis Algorithm just exploreshe prior distribution. The histogram of the trajectory of the prior as simulated below looks very to the density plot created in section 7.3B mathematically (ignore the 95% HDI, which assumes a unimodal distribution). What we can conclude from this is that the Metropolis Algorithm is capable of sampling representatively from multimodal distributions.
+Also, feed an empty vector for the data, so the Metropolis Algorithm just exploreshe prior distribution. We'll use a proposal distribution sd = 0.2. The histogram of the trajectory of the prior as simulated below looks very to the density plot created in section 7.3B mathematically (ignore the 95% HDI, which assumes a unimodal distribution). What we can conclude from this is that the Metropolis Algorithm is capable of sampling representatively from multimodal distributions.
 
 ``` r
 source("/Users/bhoeft/Desktop/temp/DBDA Programs/BernMetrop_7_3C.R")
@@ -205,9 +207,9 @@ source("/Users/bhoeft/Desktop/temp/DBDA Programs/BernMetrop_7_3C.R")
 
 ![](Ch7_Problems_files/figure-markdown_github/unnamed-chunk-10-1.png)
 
-### 7.3D Metropolis Algorithm from posterior distribution with Multimodal Prior
+### 7.3D Metropolis Algorithm from posterior distribution with Multimodal Prior Pt.1
 
-Repeat 7.3C but with observed data under consideration (2 heads and 1 tails observed). Having observed 3 observations of coin flips with expected value of 2/3, the simulated draws from the posterior distribution do appear to make sense as its a compromise between the data and a prior belief of a trimodal distribution. The prior peak near 0 is relatively unlikely given the data and the likelihood function observed, p(D | *θ*).
+Repeat 7.3C but with observed data under consideration (2 heads and 1 tails observed). Having observed 3 observations of coin flips with expected value of 2/3, the simulated draws from the posterior distribution do appear to make sense as its a compromise between the data and a prior belief of a trimodal distribution. The prior peak near 0 is relatively unlikely given the data and the likelihood function observed, p(D | *θ*). Ignore the HDI interpretation here.
 
 ``` r
 source("/Users/bhoeft/Desktop/temp/DBDA Programs/BernMetrop_7_3D.R")
@@ -220,3 +222,39 @@ source("/Users/bhoeft/Desktop/temp/DBDA Programs/BernMetrop_7_3D.R")
     *********************************************************************
 
 ![](Ch7_Problems_files/figure-markdown_github/unnamed-chunk-11-1.png)
+
+### 7.3E Metropolis Algorithm from posterior distribution with Multimodal Prior Pt. 2
+
+Change the proposal distribution so that the proposal sd = 0.02 instead of 0.2. What's different? The simulation does not appear to properly explore the posterior distribution because the mode is at a value of *θ* = 0.10 but the data observed was 2 heads in 3 coin flips, and the prior still reflected high degree of beliefs at 0.5 and 1.0 for coin bias. This occurs because our MCMC chain has an arbitrary low start point at *θ* = 0.01. Combining the low proposal SD value of 0.02, the low arbitrary starting point with the extreme trimodal prior near 0, the simulation has hard time exploring other modes of the prior given the other two factors and gets stuck.
+
+``` r
+# change proposal SD to point to 0.02 instead of 0.2.
+source("/Users/bhoeft/Desktop/temp/DBDA Programs/BernMetrop_7_3E.R")
+```
+
+
+    *********************************************************************
+    Kruschke, J. K. (2015). Doing Bayesian Data Analysis, Second Edition:
+    A Tutorial with R, JAGS, and Stan. Academic Press / Elsevier.
+    *********************************************************************
+
+![](Ch7_Problems_files/figure-markdown_github/unnamed-chunk-12-1.png)
+
+### 7.3F Metropolis Algorithm from posterior distribution with Multimodal Prior Pt. 3
+
+Change the arbitrary starting point of the Metropolis Algorithm's starting point for *θ* to be *θ* = 0.99. We observe the same *stuckness* from the prior exercise when we arbitrarily move the starting point to an extremely high value, the proposal SD is low at 0.02, and we're close to one of the prior mode's at 1.
+
+Lesson learned from 7.3E and 7.3F: **If we start a chain at various arbitrary starting points of *θ*, we'd notice that the MCMC samples of the posterior do not every converge on similar distributions. This would signal that the results don't represent the posterior distribution, and we need to adjust our algorithm set up.**
+
+``` r
+# change line 48 to change the initial trajectory value from 0.01 to 0.99
+source("/Users/bhoeft/Desktop/temp/DBDA Programs/BernMetrop_7_3F.R")
+```
+
+
+    *********************************************************************
+    Kruschke, J. K. (2015). Doing Bayesian Data Analysis, Second Edition:
+    A Tutorial with R, JAGS, and Stan. Academic Press / Elsevier.
+    *********************************************************************
+
+![](Ch7_Problems_files/figure-markdown_github/unnamed-chunk-13-1.png)

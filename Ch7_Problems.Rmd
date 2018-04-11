@@ -140,19 +140,36 @@ Inside the script `BernMetrop.R` find the function definition that specifies the
 pTheta <- ((cos(4 * pi * theta) + 1)**2 / 1.5)
 ```
 
-Also, feed an empty vector for the data, so the Metropolis Algorithm just exploreshe prior distribution. The histogram of the trajectory of the prior as simulated below looks very to the density plot created in section 7.3B mathematically (ignore the 95% HDI, which assumes a unimodal distribution). What we can conclude from this is that the Metropolis Algorithm is capable of sampling representatively from multimodal distributions.
+Also, feed an empty vector for the data, so the Metropolis Algorithm just exploreshe prior distribution. We'll use a proposal distribution sd = 0.2. The histogram of the trajectory of the prior as simulated below looks very to the density plot created in section 7.3B mathematically (ignore the 95% HDI, which assumes a unimodal distribution). What we can conclude from this is that the Metropolis Algorithm is capable of sampling representatively from multimodal distributions.
 
 ``` {r}
 source("/Users/bhoeft/Desktop/temp/DBDA Programs/BernMetrop_7_3C.R")
 ```
 
-### 7.3D Metropolis Algorithm from posterior distribution with Multimodal Prior
+### 7.3D Metropolis Algorithm from posterior distribution with Multimodal Prior Pt.1
 
-Repeat 7.3C but with observed data under consideration (2 heads and 1 tails observed). Having observed 3 observations of coin flips with expected value of 2/3, the simulated draws from the posterior distribution do appear to make sense as its a compromise between the data and a prior belief of a trimodal distribution. The prior peak near 0 is relatively unlikely given the data and the likelihood function observed, p(D | $\theta$).
+Repeat 7.3C but with observed data under consideration (2 heads and 1 tails observed). Having observed 3 observations of coin flips with expected value of 2/3, the simulated draws from the posterior distribution do appear to make sense as its a compromise between the data and a prior belief of a trimodal distribution. The prior peak near 0 is relatively unlikely given the data and the likelihood function observed, p(D | $\theta$). Ignore the HDI interpretation here. 
 
 ``` {r}
 source("/Users/bhoeft/Desktop/temp/DBDA Programs/BernMetrop_7_3D.R")
 ```
 
+### 7.3E Metropolis Algorithm from posterior distribution with Multimodal Prior Pt. 2
 
+Change the proposal distribution so that the proposal sd = 0.02 instead of 0.2. What's different? The simulation does not appear to properly explore the posterior distribution because the mode is at a value of $\theta$ = 0.10 but the data observed was 2 heads in 3 coin flips, and the prior still reflected high degree of beliefs at 0.5 and 1.0 for coin bias. This occurs because our MCMC chain has an arbitrary low start point at $\theta$ = 0.01. Combining the low proposal SD value of 0.02, the low arbitrary starting point with the extreme trimodal prior near 0, the simulation has hard time exploring other modes of the prior given the other two factors and gets stuck.  
 
+``` {r}
+# change proposal SD to point to 0.02 instead of 0.2.
+source("/Users/bhoeft/Desktop/temp/DBDA Programs/BernMetrop_7_3E.R")
+```
+
+### 7.3F Metropolis Algorithm from posterior distribution with Multimodal Prior Pt. 3
+
+Change the arbitrary starting point of the Metropolis Algorithm's starting point for $\theta$ to be $\theta$ = 0.99. We observe the same *stuckness* from the prior exercise when we arbitrarily move the starting point to an extremely high value, the proposal SD is low at 0.02, and we're close to one of the prior mode's at 1. 
+
+Lesson learned from 7.3E and 7.3F: **If we start a chain at various arbitrary starting points of $\theta$, we'd notice that the MCMC samples of the posterior do not every converge on similar distributions. This would signal that the results don't represent the posterior distribution, and we need to adjust our algorithm set up.**
+
+``` {r}
+# change line 48 to change the initial trajectory value from 0.01 to 0.99
+source("/Users/bhoeft/Desktop/temp/DBDA Programs/BernMetrop_7_3F.R")
+```
