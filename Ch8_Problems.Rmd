@@ -1,0 +1,43 @@
+---
+title: 'Chapter 8 Problems: Just Another Gibbs Sampler (JAGS)'
+author: "Brandon Hoeft"
+date: "April 22, 2018"
+output:
+  github_document:
+    toc: TRUE
+    toc_depth: 3
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, comment = "",
+                      fig.height = 6, fig.width = 6)
+options(scipen=999) # turn of scientific notation.
+```
+
+## Exercise 8.1 Run a High Level Script of JAGS code to compare 3 different subjects.
+
+The script called `Jags-Ydich-XnomSsubj-MbernBeta-Example.R` is one of the high level scripts that implements MCMC using `JAGS` via `r`. The first part of this elaborate name, *Ydich*, reflects that this high level script uses data (Y) that is dichotomous (0 and 1). The next part, *XnomSsubj* reflects that the X variables or predictors, are nominal, reflecting S different subjects. Lastly, *MbernBeta* represents our Bernoulli data model and a beta prior distribution. 
+
+For running this script, we are asked to generate data for 3 different subjects to compare differences between a parameter $\theta$ = goalscoring rate. For this, I actually used real data acquired from [American Soccer Analysis](https://www.americansocceranalysis.com/asa-xgoals/). I want to compare the goalscoring ability of two newcomers to Major League Soccer in 2017, Nemanja Nikolic, and Josef Martinez, 2 prolific goalscoring strikers. Their finishing ability based only on the known data from their inaugural season in MLS 2017 will be compared to the finishing gold standard of Bradley Wright-Phillips, whose data from the past three full seasons of 2015-2017 was acquired. These data will be used to estimate if their finishing abilities differ from each one another based on *shots attempted* and *goals scored*, which are independent Bernoulli trials. 
+
+The shots data were imported within the code of modified script below. Note that the character vector of player names needed to be converted to numeric representation (factor from character) inside the revised script below. 
+
+* **Nemanja Nikolic**: $\theta$(1)
+* **Josef Martinez**: $\theta$(2)
+* **Bradley Wright-Phillips**: $\theta$(3)
+
+
+``` {r echo = TRUE}
+# Load the functions genMCMC, smryMCMC, and plotMCMC:
+# changed lines from saving the file output like lines 20, 21, 24, 30. 
+source("/Users/bhoeft/Desktop/temp/DBDA Programs/Jags-Ydich-XnomSsubj-MbernBeta-Example_8_1.R")
+```
+
+
+## Exercise 8.2 What is ROPE?
+
+## Exercise 8.3 What gets saved by the high level scripts?
+
+## Exercise 8.4 Explore the Prior on a difference of Parameters, implied by the priors of individual paramters
+
+
